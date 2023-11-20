@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -48,7 +49,13 @@ class MainActivity : AppCompatActivity(), GreenAdapter.NumberOnCLickListener {
   }
 
   override fun onClick(value: String) {
-    Log.e("Main", "cliquei")
+    val builder = AlertDialog.Builder(this)
+    builder.setMessage("Valor $value")
+    builder.setPositiveButton("Ok, Entendi.", null)
+
+    val dialog = builder.create()
+    dialog.setTitle("Mostrando valor selecionado")
+    dialog.show()
   }
 
   companion object {
