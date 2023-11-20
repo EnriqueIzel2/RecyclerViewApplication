@@ -6,7 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class GreenAdapter : RecyclerView.Adapter<GreenAdapter.NumberViewHolder>() {
+class GreenAdapter(
+  private val listSize: Int,
+  private val listener: NumberOnCLickListener
+) : RecyclerView.Adapter<GreenAdapter.NumberViewHolder>() {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GreenAdapter.NumberViewHolder {
     val context = parent.context
     val inflater = LayoutInflater.from(context)
@@ -14,18 +17,19 @@ class GreenAdapter : RecyclerView.Adapter<GreenAdapter.NumberViewHolder>() {
 
     val view = inflater.inflate(layoutResID, parent, false)
 
-    return NumberViewHolder(view)
+    return NumberViewHolder(view, listener)
   }
 
-  override fun getItemCount(): Int {
-    TODO("Not yet implemented")
-  }
+  override fun getItemCount(): Int = listSize
 
   override fun onBindViewHolder(holder: GreenAdapter.NumberViewHolder, position: Int) {
-    TODO("Not yet implemented")
+    holder.bind(position.toString())
   }
 
-  inner class NumberViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+  inner class NumberViewHolder(
+    val view: View,
+    val listener: NumberOnCLickListener
+  ) : RecyclerView.ViewHolder(view) {
     private var numberTextView: TextView
 
     init {
@@ -34,6 +38,14 @@ class GreenAdapter : RecyclerView.Adapter<GreenAdapter.NumberViewHolder>() {
 
     fun bind(textValue: String) {
       numberTextView.text = textValue
+
+      view.setOnClickListener {
+        listener.onClick(textValue)
+      }
     }
+  }
+
+  interface NumberOnCLickListener {
+    fun onClick(value: String)
   }
 }
