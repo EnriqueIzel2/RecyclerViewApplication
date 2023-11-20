@@ -1,19 +1,30 @@
 package com.example.recyclerviewapplication
 
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class GreenAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-    TODO("Not yet implemented")
+class GreenAdapter : RecyclerView.Adapter<GreenAdapter.NumberViewHolder>() {
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GreenAdapter.NumberViewHolder {
+    val context = parent.context
+    val inflater = LayoutInflater.from(context)
+    val layoutResID = R.layout.number_list_item
+
+    val view = inflater.inflate(layoutResID, parent, false)
+
+    return NumberViewHolder(view)
   }
 
   override fun getItemCount(): Int {
     TODO("Not yet implemented")
   }
 
-  override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+  override fun onBindViewHolder(holder: GreenAdapter.NumberViewHolder, position: Int) {
     TODO("Not yet implemented")
   }
 
+  inner class NumberViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+  }
 }
