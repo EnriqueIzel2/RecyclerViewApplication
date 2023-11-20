@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RecyclerViewApplication</string>
+    <string name="action_refresh">Atualizar</string>
 </resources>
